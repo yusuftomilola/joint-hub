@@ -1,22 +1,28 @@
 import { Form, Formik } from "formik";
 import { roundClockLogo, adminbr, adminbl, admintr } from "../../assets";
+import nexusLogoIcon from "../../assets/images/nexusLogoIcon.jpg";
 import CustomInput from "../../components/CustomInput";
 import { initialValues, Schemas } from "../../utils/validationShema";
 import { FaArrowRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 function AdminLogin() {
   return (
-    <div className="bg-#F6F0ED relative">
-      <div className="flex flex-col min-h-screen justify-center gap-8 items-center mx-auto px-4">
-        <Link to={"/"}>
-          <img
-            src={roundClockLogo}
-            alt="Round o' Clock Logo"
-            className="w-24 sm:w-32"
-          />
-        </Link>
-        <div className="bg-[#FFFFFF] h-auto w-full max-w-[400px] py-8 sm:py-12 px-4 sm:px-6 ">
+    <div className="bg-#F6F0ED relative overflow-hidden">
+      <div className="flex flex-col justify-center items-center min-h-screen gap-8 mx-auto px-4">
+        <img
+          src={roundClockLogo}
+          alt="Round o' Clock Logo"
+          className="w-24 sm:w-32"
+        />
+
+        <div className="bg-[#FFFFFF] w-full max-w-[400px] py-8 sm:py-12 px-4 sm:px-6 rounded-md">
+          <div className="flex items-center justify-center mb-4">
+            <img
+              src={nexusLogoIcon}
+              alt="nexus-logo-icon"
+              className="w-12 h-12"
+            />
+          </div>
           <h1 className="text-center md:text-2xl sm:text-xl font-semibold text-[#1F2127]">
             Welcome Back
           </h1>
@@ -26,13 +32,11 @@ function AdminLogin() {
           <Formik
             initialValues={initialValues.admin}
             validationSchema={Schemas.adminSchema}
-            //   onSubmit={handleTeamFormSubmit}
           >
             {({ values, isSubmitting, errors }) => {
               console.log(errors);
               return (
                 <Form className="mt-8 space-y-8 sm:mt-12">
-                  {/* first section */}
                   <div className="space-y-6">
                     <CustomInput
                       name="email"
