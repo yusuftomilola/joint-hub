@@ -178,7 +178,7 @@ const Landing = () => {
 
                   {/* Admin Card */}
                   <div className="bg-white rounded-md   py-3 px-4 hover:scale-105 transition-transform cursor-pointer ">
-                    <Link to={"/dashboard"} className="flex flex-col gap-12">
+                    <Link to={"/admin-login"} className="flex flex-col gap-12">
                       <h3 className="text-[#EEEEEF] font-semibold text-5xl">
                         Admin
                       </h3>

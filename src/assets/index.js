@@ -76,12 +76,18 @@ import bitmoji from "./icons/bitmoji.svg";
 import departIcon from "./icons/departIcon.svg";
 import hamburgerIcon from "./icons/hamburgerIcon.svg";
 import statsIcon from "./icons/statsIcon.svg";
+import adminbr from './icons/adminsvgbl.svg';
+import adminbl from './icons/adminsvgbr.svg';
+import admintr from './icons/admintr.svg';
 
 export {
   statsIcon,
   homepage1,
   homepage2,
   homepage3,
+  adminbr,
+  adminbl,
+  admintr,
   bitmoji,
   arrivedIcon,
   clock,
