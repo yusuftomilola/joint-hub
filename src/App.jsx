@@ -18,6 +18,7 @@ import ClockIn from "./pages/ClockIn";
 import ClockOut from "./pages/ClockOut";
 import NewHubUser from "./pages/newHubUsers/NewHubUser";
 import Landing from "./pages/Landing";
+import AdminLogin from "./pages/auth/AdminLogin";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/new-user",
     element: <NewHubUser />,
+  },
+  {
+    path: "/admin-login",
+    element: <AdminLogin />,
   },
   {
     path: "/home",

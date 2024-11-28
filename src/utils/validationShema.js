@@ -1,6 +1,10 @@
 import * as Yup from "yup";
 
 export const initialValues = {
+  admin: {
+    email: '',
+    password: ''
+  },
   newHubUser: {
     fullName: "",
     gender: "",
@@ -63,6 +67,18 @@ export const initialValues = {
 };
 
 export const Schemas = {
+  adminSchema: Yup.object().shape({
+    email: Yup.string()
+      .trim()
+      .email('Please enter a valid email address')
+      .lowercase()
+      .required('Email is required'),
+    password: Yup
+      .string()
+      .required('No password provided.')
+      .min(8, 'Password is too short')
+      .matches()
+  }),
   newHubUserSchema: Yup.object().shape({
     fullName: Yup.string()
       .trim()
