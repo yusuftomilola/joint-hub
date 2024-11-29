@@ -1,13 +1,44 @@
 import { Form, Formik } from "formik";
 import { roundClockLogo, adminbr, adminbl, admintr } from "../../assets";
 import nexusLogoIcon from "../../assets/images/nexusLogoIcon.jpg";
+import { useNavigate } from "react-router-dom";
+import CustomToast from "../../components/CustomToast";
 import CustomInput from "../../components/CustomInput";
 import { initialValues, Schemas } from "../../utils/validationShema";
 import { FaArrowRight } from "react-icons/fa";
+import { adminLogin } from "../../services/auth";
+import { useAdmin } from "../../context/AdminContext";
+import { toast } from "react-toastify";
 
 function AdminLogin() {
+  const { login } = useAdmin();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (
+    values,
+    { setSubmitting, setFieldError, resetForm }
+  ) => {
+    try {
+      setSubmitting(true);
+      const response = await adminLogin(values);
+      login(response);
+      resetForm();
+      toast(<CustomToast message={response.message} />);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Login failed:", error);
+      if (error.message) {
+        setFieldError("email", error.message);
+      } else {
+        setFieldError("email", "Something went wrong. Please try again.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
-    <div className="bg-#F6F0ED relative overflow-hidden">
+    <div className="bg-[#F6F0ED] relative overflow-hidden">
       <div className="flex flex-col justify-center items-center min-h-screen gap-8 mx-auto px-4">
         <img
           src={roundClockLogo}
@@ -30,11 +61,11 @@ function AdminLogin() {
             Log in to your account
           </p>
           <Formik
+            onSubmit={handleSubmit}
             initialValues={initialValues.admin}
             validationSchema={Schemas.adminSchema}
           >
-            {({ values, isSubmitting, errors }) => {
-              console.log(errors);
+            {({ isSubmitting, errors, touched }) => {
               return (
                 <Form className="mt-8 space-y-8 sm:mt-12">
                   <div className="space-y-6">
@@ -43,16 +74,22 @@ function AdminLogin() {
                       type="email"
                       label="Email"
                       placeholder="Enter your email"
+                      error={touched.email && errors.email}
                     />
                     <CustomInput
                       name="password"
                       type="password"
-                      placeholder="Enter your password"
                       label="Password"
+                      placeholder="Enter your password"
+                      error={touched.password && errors.password}
                     />
                   </div>
-                  <button className="border rounded-md py-2 px-10 bg-[#FEDC44] flex items-center justify-center gap-1 text-xs sm:text-sm font-semibold w-full">
-                    Login
+                  <button
+                    type="submit"
+                    className="border rounded-md py-2 px-10 bg-[#FEDC44] flex items-center justify-center gap-1 text-xs sm:text-sm font-semibold w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Logging in..." : "Login"}
                     <span>
                       <FaArrowRight />
                     </span>

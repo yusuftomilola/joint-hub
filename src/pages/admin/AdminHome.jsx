@@ -30,7 +30,6 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import H3 from "../../components/H3";
-import P from "../../components/P";
 import RecentActivities from "../../components/RecentActivities";
 import BarChart from "../../components/BarChart";
 import { Link } from "react-router-dom";
@@ -44,8 +43,11 @@ import CustomInput from "../../components/CustomInput";
 import CustomDropdown from "../../components/CustomDropdown";
 import { Form, Formik } from "formik";
 import { Schemas, initialValues } from "../../utils/validationShema";
+import { useAdmin } from "../../context/AdminContext";
 
 const AdminHome = () => {
+  const navigate = useNavigate();
+  const { user } = useAdmin();
   const [addNewHubUser, setAddNewHubUser] = useState(false);
   const [addNewStaff, setAddNewStaff] = useState(false);
   const [isActive, setIsActive] = useState(false);

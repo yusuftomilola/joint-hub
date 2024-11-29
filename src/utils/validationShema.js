@@ -73,11 +73,13 @@ export const Schemas = {
       .email('Please enter a valid email address')
       .lowercase()
       .required('Email is required'),
-    password: Yup
-      .string()
-      .required('No password provided.')
-      .min(8, 'Password is too short')
-      .matches()
+    password: Yup.string()
+      .required('No password provided.') 
+      .min(4, 'Password is too short') 
+      .matches(
+        /^[a-zA-Z0-9]*$/,
+        'Password must contain only alphanumeric characters or numbers'
+      ), 
   }),
   newHubUserSchema: Yup.object().shape({
     fullName: Yup.string()

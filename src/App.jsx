@@ -1,5 +1,5 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+  import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminLayout from "./layouts/AdminLayout";
 import Home from "./pages/Home";
 import AdminHome from "./pages/admin/AdminHome";
@@ -11,7 +11,6 @@ import Complaints from "./pages/admin/Complaints";
 import UserProfile from "./pages/admin/UserProfile";
 import StaffProfile from "./pages/admin/StaffProfile";
 import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
 
 // michael
 import ClockIn from "./pages/ClockIn";
@@ -19,6 +18,7 @@ import ClockOut from "./pages/ClockOut";
 import NewHubUser from "./pages/newHubUsers/NewHubUser";
 import Landing from "./pages/Landing";
 import AdminLogin from "./pages/auth/AdminLogin";
+import { AdminProvider } from "./context/AdminContext";
 
 const router = createBrowserRouter([
   {
@@ -47,16 +47,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/",
-  //   element: <AdminLayout />,
-  //   children: [
-  //     {
-  //       index: true,
-  //       element: <AdminHome />,
-  //     },
-  //   ],
-  // },
   {
     path: "/dashboard",
     element: <AdminLayout />,
@@ -130,7 +120,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div>
+    <AdminProvider>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -145,7 +135,7 @@ function App() {
       />
 
       <RouterProvider router={router} />
-    </div>
+    </AdminProvider>
   );
 }
 
