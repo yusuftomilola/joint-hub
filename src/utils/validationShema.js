@@ -21,6 +21,15 @@ export const initialValues = {
     paymentChannel: "",
     referralCode: "",
   },
+  additionalDetailsForm: {
+    identificationType: '',
+    contactAddress: '',
+    uploadNINDocument: '',
+    nextOfKin: '',
+    nextOfKinPhone: '',
+    passport: '',
+    signedLeaseAgreementCopy: ''
+  },
   subscriptionUser: {
     fullName: "",
     gender: "",
@@ -74,12 +83,12 @@ export const Schemas = {
       .lowercase()
       .required('Email is required'),
     password: Yup.string()
-      .required('No password provided.') 
-      .min(4, 'Password is too short') 
+      .required('No password provided.')
+      .min(4, 'Password is too short')
       .matches(
         /^[a-zA-Z0-9]*$/,
         'Password must contain only alphanumeric characters or numbers'
-      ), 
+      ),
   }),
   newHubUserSchema: Yup.object().shape({
     fullName: Yup.string()
@@ -112,6 +121,15 @@ export const Schemas = {
     nextOfKinPhone: Yup.string().required(
       "Kindly enter a contact for your next of kin"
     ),
+  }),
+  additionalDetailsSchema: Yup.object().shape({
+    identificationType: Yup.string().required("Please select an Identification Type"),
+    contactAddress: Yup.string().required("Please select a Contact Address"),
+    uploadNINDocument: Yup.string().required("Please enter a start date"),
+    nextOfKin: Yup.string().required("Please select a gender"),
+    nextOfKinPhone: Yup.number().required("Please select a gender"),
+    passport: Yup.string().required(),
+    signedLeaseAgreementCopy: Yup.string().required()
   }),
   subscriptionUserSchema: Yup.object().shape({
     fullName: Yup.string()
