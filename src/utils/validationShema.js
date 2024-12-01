@@ -12,14 +12,8 @@ export const initialValues = {
     spaceAllocated: "",
     phoneNumber: "",
     email: "",
-    contactAddress: "",
-    identificationType: "",
-    startDate: "",
-    spaceAllocated: "",
-    nextOfKinName: "",
-    nextOfKinPhone: "",
-    paymentChannel: "",
     referralCode: "",
+    howDidYouHear: ''
   },
   additionalDetailsForm: {
     identificationType: '',
@@ -108,26 +102,16 @@ export const Schemas = {
       "Please select a subscription type"
     ),
     spaceAllocated: Yup.string().required("Please select a space"),
-    paymentChannel: Yup.string().required("Please select a payment channel"),
-    startDate: Yup.string().required("Please enter a start date"),
+    referralCode: Yup.number().optional(),
+    howDidYouHear: Yup.string().optional(),
     gender: Yup.string().required("Please select a gender"),
-    identificationType: Yup.string().required(
-      "Please choose an identification type"
-    ),
-    contactAddress: Yup.string().required("Kindly enter a contact address"),
-    nextOfKinName: Yup.string().required(
-      "Kindly enter a name for your next of kin"
-    ),
-    nextOfKinPhone: Yup.string().required(
-      "Kindly enter a contact for your next of kin"
-    ),
   }),
   additionalDetailsSchema: Yup.object().shape({
-    identificationType: Yup.string().required("Please select an Identification Type"),
-    contactAddress: Yup.string().required("Please select a Contact Address"),
+    identificationType: Yup.string().required("Please choose an identification type"),
+    contactAddress: Yup.string().required("Kindly enter a contact address"),
     uploadNINDocument: Yup.string().required("Please enter a start date"),
-    nextOfKin: Yup.string().required("Please select a gender"),
-    nextOfKinPhone: Yup.number().required("Please select a gender"),
+    nextOfKin: Yup.string().required("Kindly enter a name for your next of kin"),
+    nextOfKinPhone: Yup.number().required("Kindly enter a contact for your next of kin"),
     passport: Yup.string().required(),
     signedLeaseAgreementCopy: Yup.string().required()
   }),

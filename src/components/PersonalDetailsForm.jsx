@@ -17,7 +17,7 @@ function PersonalDetailsForm({ initialValues, onSubmit }) {
       onSubmit={handleSubmit}
       validationSchema={Schemas.newHubUserSchema}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, isValid }) => (
         <Form className="max-w-4xl mx-auto mt-6 sm:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 px-4 sm:px-6">
           <CustomInput
             name="fullName"
@@ -55,7 +55,7 @@ function PersonalDetailsForm({ initialValues, onSubmit }) {
           />
           <CustomInput
             name="referralCode"
-            type="text"
+            type="number"
             label="Referral Code (Optional)"
             placeholder="Enter code"
           />
@@ -76,13 +76,21 @@ function PersonalDetailsForm({ initialValues, onSubmit }) {
               { value: "two", label: "Two" },
             ]}
           />
+
+          {/* <CustomButton
+            type="submit"
+            label="Continue"
+            isLoading={isSubmitting}
+            loadingText="Submitting..."
+          /> */}
           <div className="col-span-1 md:col-span-2 mt-4 text-end ">
-            <CustomButton
+            <button
               type="submit"
-              label="Continue"
-              isLoading={isSubmitting}
-              loadingText="Submitting..."
-            />
+              className=" bg-black md:w-[194px] text-white px-12 py-2 rounded-full"
+            >
+              {isSubmitting ? "Continuing.." : "Continue"}
+              {/* Continue */}
+            </button>
           </div>
         </Form>
       )}

@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import CustomDropdown from "./CustomDropdown";
 import CustomInput from "./CustomInput";
 import { Formik } from "formik";
+import { FileUpload } from "./CustomFileUpload";
 import { Form } from "react-router-dom";
 import { Schemas } from "../utils/validationShema";
+import CustomButton from "./CustomButton";
 
 function AdditionalDetailsForm({ initialValues, onSubmit, onBack }) {
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(false);
-    // onSubmit(values);
-    console.log(values);
+    onSubmit(values);
   };
+
+  const handleBack = () => {
+    onBack();
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -18,66 +24,59 @@ function AdditionalDetailsForm({ initialValues, onSubmit, onBack }) {
       validationSchema={Schemas.additionalDetailsSchema}
     >
       {({ isSubmitting }) => (
-        <Form className="max-w-4xl mx-auto mt-6 sm:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 px-4 sm:px-6">
-          <CustomDropdown
-            name="identificationType"
-            label="Identification Type"
-            options={[
-              { value: "Male", label: "Male" },
-              { value: "Female", label: "Female" },
-            ]}
-          />
-          <CustomDropdown
-            name="contactAddress"
-            label="Contact Address"
-            options={[
-              { value: "one", label: "One" },
-              { value: "two", label: "Two" },
-            ]}
-          />
-          <CustomInput
-            name="phoneNumber"
-            type="tel"
-            label="Phone Number"
-            placeholder="+234"
-          />
-          <CustomInput
-            name="email"
-            type="email"
-            label="Email (Optional)"
-            placeholder="Your email"
-          />
-          <CustomInput
-            name="referralCode"
-            type="text"
-            label="Referral Code (Optional)"
-            placeholder="Enter code"
-          />
-          <CustomDropdown
-            name="subscriptionType"
-            label="Subscription Type"
-            options={[
-              { value: "one", label: "One" },
-              { value: "two", label: "Two" },
-            ]}
-          />
-          <CustomDropdown
-            name="howDidYouHear"
-            label="How did you hear about us"
-            defaultValue="Twitter, a friend..."
-            options={[
-              { value: "one", label: "One" },
-              { value: "two", label: "Two" },
-            ]}
-          />
-          <div className="col-span-1 md:col-span-2 mt-4 text-end ">
-            <button
-              type="submit"
-              className=" bg-black md:w-[194px] text-white px-12 py-2 rounded-full"
-            >
-              {isSubmitting ? "Continuing.." : "Continue"}
-              {/* Continue */}
-            </button>
+        <Form className="max-w-4xl mx-auto sm:gap-6 px-4 sm:px-6 ">
+          <p className="text-[#3B3F49] text-sm font-semibold">
+            Additional Information
+          </p>
+          <div className="mt-2 sm:mt-3 grid grid-cols-1 md:grid-cols-2 gap-6  ">
+            <CustomDropdown
+              name="identificationType"
+              label="Identification Type"
+              options={[
+                { value: "Male", label: "Male" },
+                { value: "Female", label: "Female" },
+              ]}
+            />
+            <CustomDropdown
+              name="contactAddress"
+              label="Contact Address"
+              options={[
+                { value: "one", label: "One" },
+                { value: "two", label: "Two" },
+              ]}
+            />
+            <div className="col-span-1 md:col-span-2">
+              <FileUpload name="ninDocument" label="Upload NIN document" />
+            </div>
+            <CustomInput
+              name="nextOfKin"
+              type="text"
+              label="Next of Kin"
+              placeholder="NOK name"
+            />
+            <CustomInput
+              name="nextOfKinPhone"
+              type="number"
+              label="Next of Kin Phone"
+              placeholder="Phone Number of NOK"
+            />
+            <FileUpload name="ninDocument" label="Passport/Profile Photo" />
+
+            <FileUpload
+              name="ninDocument"
+              label="Signed Lease Agreement Copy"
+            />
+
+            <div className="col-span-1 md:col-span-2 mt-4 flex justify-between ">
+              <CustomButton type="button" label="Back" onClick={handleBack} />
+              <button
+                type="submit"
+                className=" bg-black md:w-[194px] text-white px-12 py-2 rounded-full"
+              >
+                {isSubmitting ? "Continuing.." : "Get In"}
+                {/* Continue */}
+              </button>
+            </div>
           </div>
         </Form>
       )}

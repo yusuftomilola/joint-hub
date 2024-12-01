@@ -17,7 +17,7 @@ function CustomDropdown(props) {
         {...rest}
       >
         <option value="" disabled>
-          {defaultValue || "Select an option"}
+          {defaultValue || "select option"}
         </option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>

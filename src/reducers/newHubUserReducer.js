@@ -15,13 +15,6 @@ export const initialState = {
             phoneNumber: "",
             email: "",
             contactAddress: "",
-            identificationType: "",
-            startDate: "",
-            // eslint-disable-next-line no-dupe-keys
-            spaceAllocated: "",
-            nextOfKinName: "",
-            nextOfKinPhone: "",
-            paymentChannel: "",
             referralCode: "",
         },
         additionalInformation: {
